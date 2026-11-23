@@ -1,0 +1,124 @@
+/* ============================================================================
+   Hotel Room Daily Checklist & Inventory System
+   Mobile-First Custom Styles, Tap Targets (44px+), Dark Mode & Print CSS
+   ============================================================================ */
+
+:root {
+    --font-bn: 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+html, body {
+    font-family: var(--font-bn);
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+}
+
+/* Prevent double-tap zoom delay on mobile phones for all interactive controls */
+button, a, input, select, textarea, .tap-target {
+    touch-action: manipulation;
+}
+
+/* Minimum 44px touch targets for mobile ergonomics */
+.tap-btn {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Hide scrollbars cleanly on horizontal pill strips */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Safe-area padding for mobile bottom navigation bar */
+.pb-mobile-nav {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+}
+@media (min-width: 768px) {
+    .pb-mobile-nav {
+        padding-bottom: 2.5rem;
+    }
+}
+
+.mobile-bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Option chip states */
+.opt-chip {
+    min-height: 44px;
+    transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, transform 80ms ease;
+    user-select: none;
+}
+.opt-chip:active {
+    transform: scale(0.97);
+}
+
+/* Counter control row */
+.counter-box {
+    min-height: 44px;
+    transition: background-color 140ms ease, border-color 140ms ease;
+}
+.counter-btn {
+    min-height: 40px;
+    min-width: 40px;
+    transition: background-color 120ms ease, transform 80ms ease;
+    user-select: none;
+}
+.counter-btn:active {
+    transform: scale(0.93);
+}
+
+/* Room card subtle elevation */
+.room-card {
+    transition: box-shadow 180ms ease, border-color 180ms ease;
+}
+
+/* Save status pulse */
+@keyframes pulseDot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+}
+.sync-dot-live {
+    animation: pulseDot 2.2s infinite;
+}
+
+/* Toast notification animation */
+.toast-item {
+    animation: slideUpFade 200ms ease-out;
+}
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Print CSS */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #111827 !important;
+        font-size: 11pt !important;
+    }
+    .no-print,
+    header,
+    nav,
+    .mobile-bottom-nav,
+    #toast-container {
+        display: none !important;
+    }
+    .print-break-inside-avoid {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    table {
+        border-collapse: collapse !important;
+        width: 100% !important;
+    }
+    th, td {
+        border: 1px solid #d1d5db !important;
+        padding: 6px 8px !important;
+    }
+}
