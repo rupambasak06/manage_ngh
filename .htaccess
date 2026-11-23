@@ -1,0 +1,31 @@
+# Hotel Room Daily Checklist & Inventory System
+# Apache Shared Hosting (.htaccess)
+
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block direct web access to internal directories
+    RewriteRule ^(app|config|sql|lang)(/.*)?$ - [F,L]
+
+    # Block direct access to sensitive files
+    RewriteRule ^(\.htaccess|install\.lock|README_BN\.md)$ - [F,L]
+
+    # Route all non-file, non-directory requests to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Disable PHP display_errors in production (if allowed by host)
+<IfModule mod_php.c>
+    php_flag display_errors Off
+</IfModule>
